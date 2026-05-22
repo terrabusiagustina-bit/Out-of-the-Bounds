@@ -32,13 +32,24 @@
             position: relative;
         }
 
+        /* CANVAS DE CODIGO DE FONDO */
+        #code-matrix {
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh;
+            z-index: -2;
+            opacity: 0.25; /* Lo mantenemos sutil para no tapar la info */
+        }
+
         /* EFECTO GLITCH EN EL FONDO */
         .glitch-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1;
-            background: var(--bg-dark);
             overflow: hidden;
+            pointer-events: none;
         }
 
         /* Líneas de escaneo estilo TV vieja */
@@ -56,7 +67,7 @@
             z-index: 999;
         }
 
-        /* Animación de Glitch en el fondo */
+        /* Animación de Glitch de colores en el fondo */
         .glitch-bg::before, .glitch-bg::after {
             content: '';
             position: absolute;
@@ -352,7 +363,7 @@
         }
 
         .char-card:hover .char-img {
-            filter: drop-shadow(0 0 10px var(--pink-neon));
+            filter: drop-shadow(0 0 10px var(--cyan-neon));
         }
 
         .char-card h4 {
@@ -419,13 +430,15 @@
 </head>
 <body>
 
+    <canvas id="code-matrix"></canvas>
+
     <div class="glitch-bg"></div>
     <div class="scanlines"></div>
 
     <div class="container">
         
         <header>
-            <img src="logofinalcolor.png" alt="Out of the Bounds Logo" class="main-logo">
+            <img src="logofinal.jpg" alt="Out of the Bounds Logo" class="main-logo">
             
             <div class="video-wrapper">
                 <div class="video-placeholder-text">
@@ -474,7 +487,7 @@
             
             <div class="character-grid">
                 <div class="char-card">
-                    <img src="glitchversionfinal.jpg" alt="Personaje Glitch" class="char-img">
+                    <img src="glitchh.png" alt="Personaje Glitch" class="char-img">
                     <h4>Glitch</h4>
                 </div>
                 <div class="char-card">
@@ -536,6 +549,53 @@
             <a href="mailto:agustinaterrabusi15@gmail.com">Enviar Email</a>
         </div>
     </footer>
+
+    <script>
+        const canvas = document.getElementById('code-matrix');
+        const ctx = canvas.getContext('2d');
+
+        // Ajustar tamaño del canvas a la pantalla
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Caracteres que van a caer (binario y hexadecimal para look de código)
+        const chars = '010101110010A B C D E F'.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            // Fondo semi transparente para crear el rastro (trail)
+            ctx.fillStyle = 'rgba(18, 12, 36, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Color del texto (cian neón)
+            ctx.fillStyle = '#00f0ff';
+            ctx.font = fontSize + 'px "Share Tech Mono"';
+
+            for(let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reiniciar la gota al llegar abajo con un poco de aleatoriedad
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        // Velocidad de caída
+        setInterval(drawMatrix, 50);
+    </script>
 
 </body>
 </html>
