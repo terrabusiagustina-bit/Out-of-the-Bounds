@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Out of the Bounds</title>
+    <title>Out of the Bounds - Presentación</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         /* Paleta de colores */
@@ -35,12 +35,9 @@
         /* CANVAS DE CODIGO DE FONDO */
         #code-matrix {
             position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100vw; 
-            height: 100vh;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2;
-            opacity: 0.25; /* Lo mantenemos sutil para no tapar la info */
+            opacity: 0.2; 
         }
 
         /* EFECTO GLITCH EN EL FONDO */
@@ -52,7 +49,6 @@
             pointer-events: none;
         }
 
-        /* Líneas de escaneo estilo TV vieja */
         .scanlines {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -67,7 +63,6 @@
             z-index: 999;
         }
 
-        /* Animación de Glitch de colores en el fondo */
         .glitch-bg::before, .glitch-bg::after {
             content: '';
             position: absolute;
@@ -78,24 +73,13 @@
             background-size: 100% 150px;
         }
 
-        .glitch-bg::before {
-            animation: bg-glitch-anim 4s infinite linear;
-        }
-
-        .glitch-bg::after {
-            animation: bg-glitch-anim 6s infinite reverse;
-            opacity: 0.7;
-        }
+        .glitch-bg::before { animation: bg-glitch-anim 4s infinite linear; }
+        .glitch-bg::after { animation: bg-glitch-anim 6s infinite reverse; opacity: 0.7; }
 
         @keyframes bg-glitch-anim {
-            0% { transform: translateY(0) translateX(0); opacity: 0.5; }
-            10% { transform: translateY(20px) translateX(2px); opacity: 0.8; }
-            20% { transform: translateY(40px) translateX(-2px); }
-            30% { transform: translateY(60px) translateX(0); }
-            40% { transform: translateY(80px) translateX(5px); opacity: 1; }
-            41% { transform: translateY(-20px) translateX(-5px); opacity: 0.2; filter: hue-rotate(90deg); }
-            50% { transform: translateY(100px) translateX(0); opacity: 0.5; }
-            100% { transform: translateY(150px) translateX(0); opacity: 0.5; }
+            0% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(100px); opacity: 0.8; }
+            100% { transform: translateY(150px); opacity: 0.5; }
         }
 
         h1, h2, h3, h4, .btn {
@@ -104,79 +88,94 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem;
             position: relative;
             z-index: 10;
         }
 
-        /* HEADER Y LOGO */
-        header {
-            text-align: center;
-            padding: 2rem 0 2rem;
+        /* NAVBAR (Logo pequeño y al costado) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            margin-bottom: 2rem;
         }
 
         .main-logo {
-            max-width: 450px;
-            width: 100%;
+            max-width: 160px;
             height: auto;
-            margin-bottom: 2rem;
-            filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5));
-            animation: logo-float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
         }
 
-        @keyframes logo-float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); filter: drop-shadow(0 0 25px rgba(255, 0, 127, 0.6)); }
-            100% { transform: translateY(0px); }
+        .nav-title {
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
         }
 
-        /* VIDEO PLACEHOLDER */
+        /* HERO SECCIÓN (Video y Votar juntos arriba) */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             background-color: #000;
             border: 2px solid var(--cyan-neon);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
             border-radius: 8px;
-            margin-bottom: 3rem;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .video-wrapper iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
         }
 
         .video-placeholder-text {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             color: var(--cyan-neon);
-            opacity: 0.5;
-            font-size: 1.2rem;
+            opacity: 0.6;
+            font-size: 1.1rem;
             text-align: center;
         }
 
-        /* BOTON VOTAR */
-        .vote-section {
+        .action-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 0, 127, 0.05);
+            border: 2px dashed var(--pink-neon);
+            padding: 2.5rem 1.5rem;
+            border-radius: 8px;
             text-align: center;
-            margin-bottom: 5rem;
+            height: 100%;
+        }
+
+        .action-box p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
         }
 
         .btn-votar {
             display: inline-block;
-            padding: 1.5rem 4rem;
-            font-size: 2rem;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: var(--bg-dark);
             background: var(--cyan-neon);
@@ -184,65 +183,76 @@
             border-radius: 4px;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 0 20px var(--cyan-neon), inset 0 0 10px rgba(255,255,255,0.5);
+            box-shadow: 0 0 20px var(--cyan-neon);
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-votar::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: all 0.5s ease;
         }
 
         .btn-votar:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 0 40px var(--cyan-neon), 0 0 20px var(--pink-neon);
+            transform: scale(1.03);
+            box-shadow: 0 0 35px var(--pink-neon);
             background: var(--pink-neon);
             color: white;
         }
 
-        .btn-votar:hover::before {
-            left: 100%;
-        }
-
         @keyframes pulse {
             0% { box-shadow: 0 0 15px var(--cyan-neon); }
-            50% { box-shadow: 0 0 35px var(--cyan-neon), 0 0 15px var(--cyan-neon); }
+            50% { box-shadow: 0 0 30px var(--cyan-neon); }
             100% { box-shadow: 0 0 15px var(--cyan-neon); }
         }
 
-        /* SECCIONES DE INFO */
+        /* LAYOUT DE DOS COLUMNAS PARA CONCEPTO E IMAGEN DE ERROR */
+        .concept-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .failing-system-box {
+            background: #1a1130;
+            border: 1px solid var(--purple-light);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 220px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .failing-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        /* SECCIONES COMPARTIDAS */
         section {
             background: var(--bg-panel);
             border-left: 4px solid var(--cyan-neon);
             padding: 2.5rem;
             margin-bottom: 3rem;
             border-radius: 0 8px 8px 0;
-            box-shadow: 5px 5px 25px rgba(0,0,0,0.7);
+            box-shadow: 5px 5px 25px rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         section:hover {
-            transform: translateX(10px);
+            transform: translateX(8px);
             border-left-color: var(--pink-neon);
         }
 
-        /* Texto Glitch para Títulos */
         .glitch-title {
             color: var(--pink-neon);
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 0, 127, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 127, 0.2);
             padding-bottom: 0.5rem;
             display: inline-block;
-            position: relative;
         }
 
         p {
@@ -250,9 +260,52 @@
             margin-bottom: 1rem;
         }
 
+        /* NUEVO DISEÑO PASO A PASO PARA LAS MECÁNICAS */
+        .mechanics-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-card {
+            background: rgba(18, 12, 36, 0.6);
+            border: 1px solid var(--purple-light);
+            padding: 1.5rem;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .step-card:hover {
+            border-color: var(--cyan-neon);
+        }
+
+        .step-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: rgba(0, 240, 255, 0.15);
+            position: absolute;
+            top: 5rem;
+            right: 1rem;
+            line-height: 1;
+        }
+
+        .step-card h3 {
+            color: var(--cyan-neon);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .step-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
         /* HIGHLIGHTS / USP */
         .usp-box {
-            background: rgba(0, 240, 255, 0.05);
+            background: rgba(0, 240, 255, 0.03);
             border: 1px solid var(--cyan-neon);
             padding: 1.5rem;
             border-radius: 8px;
@@ -260,34 +313,43 @@
             text-align: center;
         }
         
-        .usp-box h3 {
-            color: var(--cyan-neon);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+        .usp-box h3 { color: var(--cyan-neon); margin-bottom: 0.5rem; }
+
+        /* PERSONAJES GRID */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
-        /* GAMEPLAY GRID */
-        .gameplay-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        .tag {
-            background: rgba(94, 70, 156, 0.3);
+        .char-card {
+            background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--purple-light);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
             transition: all 0.3s ease;
         }
 
-        .tag:hover {
-            background: var(--cyan-neon);
-            color: var(--bg-dark);
+        .char-card:hover {
             border-color: var(--cyan-neon);
-            box-shadow: 0 0 15px var(--cyan-neon);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .char-img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .char-card h4 {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            border-top: 1px solid rgba(94, 70, 156, 0.4);
+            padding-top: 0.5rem;
         }
 
         /* TABLA DE REFERENCIAS */
@@ -301,115 +363,36 @@
             padding: 1rem;
             text-align: left;
             border-bottom: 1px solid var(--purple-light);
+            font-size: 1rem;
         }
 
-        .refs-table th {
-            color: var(--cyan-neon);
-            font-family: 'Orbitron', sans-serif;
-        }
+        .refs-table th { color: var(--cyan-neon); font-family: 'Orbitron', sans-serif; }
+        .refs-table tr:hover { background: rgba(255, 255, 255, 0.03); }
 
-        .refs-table tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* PERSONAJES GRID */
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .char-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--purple-light);
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .char-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 240, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-
-        .char-card:hover {
-            border-color: var(--cyan-neon);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .char-card:hover::before {
-            opacity: 1;
-            left: 100%;
-        }
-
-        .char-img {
-            width: 100%;
-            height: 250px;
-            object-fit: contain;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
-            transition: filter 0.3s ease;
-            margin-bottom: 1rem;
-        }
-
-        .char-card:hover .char-img {
-            filter: drop-shadow(0 0 10px var(--cyan-neon));
-        }
-
-        .char-card h4 {
-            color: var(--text-light);
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            border-top: 1px solid rgba(94, 70, 156, 0.5);
-            padding-top: 0.5rem;
-        }
-
-        /* FOOTER / CREADOR */
+        /* FOOTER */
         footer {
             text-align: center;
             padding: 3rem 2rem;
             background: rgba(10, 6, 20, 0.95);
             border-top: 2px solid var(--pink-neon);
             margin-top: 4rem;
-            position: relative;
-            z-index: 10;
         }
 
-        footer h2 {
-            color: var(--cyan-neon);
-            border: none;
-            margin-bottom: 1rem;
-        }
-
-        footer p {
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
+        footer h2 { color: var(--cyan-neon); margin-bottom: 0.5rem; }
+        footer p { color: var(--text-muted); }
 
         .contact-links {
             margin-top: 1.5rem;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .contact-links a {
             color: var(--pink-neon);
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
-            padding: 0.5rem 1.5rem;
+            padding: 0.4rem 1.2rem;
             border: 1px solid var(--pink-neon);
             border-radius: 4px;
             transition: all 0.3s;
@@ -418,119 +401,135 @@
         .contact-links a:hover {
             background: var(--pink-neon);
             color: var(--bg-dark);
-            box-shadow: 0 0 15px var(--pink-neon);
+            box-shadow: 0 0 10px var(--pink-neon);
         }
 
-        @media (max-width: 768px) {
-            .main-logo { max-width: 300px; }
-            .btn-votar { font-size: 1.5rem; padding: 1rem 2rem; }
-            section { transform: none !important; margin-left: 10px; margin-right: 10px; padding: 1.5rem; }
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .hero-section, .concept-layout { grid-template-columns: 1fr; }
+            .action-box { padding: 1.5rem; }
+            .navbar { flex-direction: column; gap: 0.5rem; text-align: center; }
+            section { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <canvas id="code-matrix"></canvas>
-
     <div class="glitch-bg"></div>
     <div class="scanlines"></div>
 
     <div class="container">
         
-        <header>
-            <img src="logofinal.png" alt="Out of the Bounds Logo" class="main-logo">
-            
+        <nav class="navbar">
+            <img src="logofinal.jpg" alt="Out of the Bounds Logo" class="main-logo">
+            <div class="nav-title">GAME PITCH PRESSED</div>
+        </nav>
+
+        <div class="hero-section">
             <div class="video-wrapper">
                 <div class="video-placeholder-text">
-                    [ Inserta tu código de YouTube o Vimeo Aquí ]<br>
-                    <small>Reemplaza este texto por el código &lt;iframe&gt;</small>
+                    [ Aquí va tu Video Promocional ]<br>
+                    <small>Reemplaza este bloque por tu código iframe de YouTube/Vimeo</small>
                 </div>
             </div>
-        </header>
-
-        <div class="vote-section">
-            <a href="https://terrabusiagustina-bit.github.io/agradecimiento/" class="btn-votar">¡VOTAR AHORA!</a>
+            
+            <div class="action-box">
+                <p>¿Te gusta la propuesta de romper el sistema?</p>
+                <a href="#link-de-votacion" class="btn-votar">VOTAR</a>
+            </div>
         </div>
 
-        <section id="concepto">
-            <h2 class="glitch-title">El Sistema está Roto</h2>
-            <p><strong>Un glitch se adentra en un videojuego olvidado</strong> que continúa funcionando sin jugadores. Su objetivo es romper sus ciclos y desestabilizar el sistema desde adentro.</p>
-            <p>A medida que avanza por distintos niveles, el jugador deberá intervenir en su lógica y enfrentar a las entidades del sistema que intentan, desesperadamente, mantener el orden establecido.</p>
-            <p style="color: var(--cyan-neon); font-style: italic; margin-top: 1rem;">¿Serás capaz de liberar al mundo de su repetición constante o provocarás su colapso definitivo?</p>
-        </section>
+        <div class="concept-layout">
+            <section id="concepto" style="margin-bottom: 0;">
+                <h2 class="glitch-title">El Sistema está Roto</h2>
+                <p><strong>Un glitch se adentra en un videojuego olvidado</strong> que continúa funcionando sin ningún jugador activo. Tu único objetivo es quebrar sus ciclos repetitivos y desestabilizar el núcleo del software.</p>
+                <p>Intervén en su lógica interna y enfréntate cara a cara a las entidades de seguridad que intentan desesperadamente mantener el orden algorítmico.</p>
+            </section>
+
+            <div class="failing-system-box">
+                <img src="sistema_fallando.png" alt="Sistema Fallando - Glitch Art" class="failing-img" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\"padding:2rem; text-align:center; color:var(--pink-neon);\">&lt; Inserta aquí la imagen del Sistema Fallando / Código Corrupto &gt;</div>'">
+            </div>
+        </div>
 
         <div class="usp-box">
-            <h3>NUESTRO SELLO ÚNICO</h3>
-            <p><strong>El sistema actúa como un oponente dinámico.</strong> No es un entorno pasivo: modifica en tiempo real la visibilidad, los caminos y las condiciones del nivel para impedir tu avance.</p>
+            <h3>EL ENTORNO ES TU OPONENTE</h3>
+            <p>El juego no es pasivo: el sistema altera en tiempo real los caminos, bloquea la visibilidad y cambia las reglas de cada nivel para evitar que avances.</p>
         </div>
-
-        <section id="gameplay">
-            <h2 class="glitch-title">Mecánicas de Juego</h2>
-            <p>La supervivencia depende de tu capacidad analítica y tus reflejos. Sumérgete en un gameplay que desafía la lógica:</p>
-            <div class="gameplay-tags">
-                <span class="tag">Predicción</span>
-                <span class="tag">Razonamiento espacial</span>
-                <span class="tag">Persecución y evasión</span>
-                <span class="tag">Supervivencia</span>
-                <span class="tag">Observar patrones</span>
-                <span class="tag">Predecir movimientos</span>
-                <span class="tag">Ejecutar con precisión</span>
-                <span class="tag">Esquivar obstáculos</span>
-                <span class="tag">Activar elementos</span>
-                <span class="tag">Toma de decisiones</span>
-            </div>
-        </section>
 
         <section id="galeria">
             <h2 class="glitch-title">Entidades del Sistema</h2>
-            <p>Conoce a los elementos corruptos y a los agentes de seguridad que habitan dentro de este entorno olvidado.</p>
+            <p>Estos son los programas y procesos que patrullan el código del videojuego olvidado:</p>
             
             <div class="character-grid">
                 <div class="char-card">
-                    <img src="glitchh.png" alt="Personaje Glitch" class="char-img">
+                    <img src="glitchh.png" alt="Glitch" class="char-img">
                     <h4>Glitch</h4>
                 </div>
                 <div class="char-card">
-                    <img src="luxcolor.png" alt="Personaje Lux" class="char-img">
+                    <img src="luxcolor.png" alt="Lux" class="char-img">
                     <h4>Lux</h4>
                 </div>
                 <div class="char-card">
-                    <img src="logcolor.png" alt="Personaje Log" class="char-img">
+                    <img src="logcolor.png" alt="Log" class="char-img">
                     <h4>Log</h4>
                 </div>
                 <div class="char-card">
-                    <img src="patchcolor.png" alt="Personaje Patch" class="char-img">
+                    <img src="patchcolor.png" alt="Patch" class="char-img">
                     <h4>Patch</h4>
                 </div>
             </div>
         </section>
 
+        <section id="gameplay">
+            <h2 class="glitch-title">¿Cómo se Juega?</h2>
+            <p>Aprender las reglas de <strong>Out of the Bounds</strong> es simple; dominarlas y ganarle al sistema es el verdadero desafío:</p>
+            
+            <div class="mechanics-steps">
+                <div class="step-card">
+                    <h3>1. Observa y Predice</h3>
+                    <p>Estudia los movimientos de las entidades de seguridad. Cada elemento sigue un patrón lógico estricto que debes calcular antes de actuar.</p>
+                    <div class="step-num">01</div>
+                </div>
+                <div class="step-card">
+                    <h3>2. Modifica el Entorno</h3>
+                    <p>No estás atado a las físicas comunes. Hackea las reglas de los niveles cambiando entre los estados del sistema: activar mecanismos o atravesar paredes sólidas.</p>
+                    <div class="step-num">02</div>
+                </div>
+                <div class="step-card">
+                    <h3>3. Evade y Sobrevive</h3>
+                    <p>Escapa de persecuciones dinámicas donde el mapa altera tu visibilidad en tiempo real. Ejecuta movimientos limpios y precisos para no ser borrado.</p>
+                    <div class="step-num">03</div>
+                </div>
+            </div>
+        </section>
+
         <section id="referencias">
-            <h2 class="glitch-title">Inspiraciones y Evolución</h2>
+            <h2 class="glitch-title">Inspiraciones e Innovación</h2>
             <div style="overflow-x:auto;">
                 <table class="refs-table">
                     <thead>
                         <tr>
-                            <th>Juego de Ref.</th>
-                            <th>Nuestra Similitud</th>
-                            <th>La Diferencia OUT OF THE BOUNDS</th>
+                            <th>Juegos Base</th>
+                            <th>Qué tomamos de ellos</th>
+                            <th>Nuestra evolución</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Portal</strong></td>
-                            <td>Uso de una mecánica central para resolver situaciones.</td>
-                            <td>El jugador no mantiene una sola lógica: debe cambiar constantemente entre esquivar, activar y atravesar.</td>
+                            <td>Resolver retos con una mecánica central.</td>
+                            <td>Aquí la lógica cambia constantemente entre esquivar, activar y traspasar código.</td>
                         </tr>
                         <tr>
                             <td><strong>Inside</strong></td>
-                            <td>Uso del entorno y la atmósfera para generar tensión.</td>
-                            <td>Nuestro personaje, LUX, puede cambiar la visibilidad en tiempo real, afectando directamente el gameplay.</td>
+                            <td>Atmósfera inmersiva y tensión ambiental.</td>
+                            <td>Añadimos a LUX cambiando las condiciones de iluminación y gameplay en tiempo real.</td>
                         </tr>
                         <tr>
                             <td><strong>Superliminal</strong></td>
-                            <td>Interacción con reglas del entorno para avanzar.</td>
-                            <td>No se altera la perspectiva visual, sino que se alteran los estados internos del sistema (activar, desactivar, atravesar código).</td>
+                            <td>Alteración del entorno de juego.</td>
+                            <td>No manipulamos la perspectiva óptica, manipulamos los estados del propio motor del juego.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -541,12 +540,10 @@
 
     <footer id="creador">
         <h2>MEET THE CREATOR</h2>
-        <p>Hola, mi nombre es <strong>Agustina Terrabusi</strong>.</p>
-        <p>Estudiante de la Universidad del Salvador.</p>
-        <p>Si te gustó mi proyecto, no dudes en visitar mi portfolio o ponerte en contacto.</p>
+        <p>Desarrollado por <strong>Agustina Terrabusi</strong> — Estudiante de la Universidad del Salvador.</p>
         <div class="contact-links">
-            <a href="https://terrabusiagustina-bit.github.io/Portfolio/" target="_blank">Ver Portfolio</a>
-            <a href="mailto:agustinaterrabusi15@gmail.com">Enviar Email</a>
+            <a href="https://terrabusiagustina-bit.github.io/Portfolio/" target="_blank">Mi Portfolio</a>
+            <a href="mailto:agustinaterrabusi15@gmail.com">Contacto</a>
         </div>
     </footer>
 
@@ -554,7 +551,6 @@
         const canvas = document.getElementById('code-matrix');
         const ctx = canvas.getContext('2d');
 
-        // Ajustar tamaño del canvas a la pantalla
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -562,22 +558,16 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Caracteres que van a caer (binario y hexadecimal para look de código)
-        const chars = '010101110010A B C D E F'.split('');
+        const chars = '010101110010ABCDEF'.split('');
         const fontSize = 14;
         const columns = canvas.width / fontSize;
         const drops = [];
 
-        for(let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
+        for(let x = 0; x < columns; x++) { drops[x] = 1; }
 
         function drawMatrix() {
-            // Fondo semi transparente para crear el rastro (trail)
             ctx.fillStyle = 'rgba(18, 12, 36, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Color del texto (cian neón)
             ctx.fillStyle = '#00f0ff';
             ctx.font = fontSize + 'px "Share Tech Mono"';
 
@@ -585,15 +575,10 @@
                 const text = chars[Math.floor(Math.random() * chars.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-                // Reiniciar la gota al llegar abajo con un poco de aleatoriedad
-                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
                 drops[i]++;
             }
         }
-
-        // Velocidad de caída
         setInterval(drawMatrix, 50);
     </script>
 
