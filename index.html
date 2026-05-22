@@ -6,13 +6,13 @@
     <title>Out of the Bounds</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        /* Paleta de colores basada en tus imágenes */
+        /* Paleta de colores */
         :root {
-            --bg-dark: #120c24; /* Fondo morado muy oscuro */
-            --bg-panel: #221842; /* Fondo de paneles */
-            --cyan-neon: #00f0ff; /* El cian del logo y la cara del personaje */
-            --purple-light: #5e469c; /* Morado de la capa */
-            --pink-neon: #ff007f; /* Detalles magenta/rosa */
+            --bg-dark: #120c24; 
+            --bg-panel: rgba(34, 24, 66, 0.85); 
+            --cyan-neon: #00f0ff; 
+            --purple-light: #5e469c; 
+            --pink-neon: #ff007f; 
             --text-light: #e0e5ec;
             --text-muted: #8d85c4;
         }
@@ -29,12 +29,65 @@
             font-family: 'Share Tech Mono', monospace;
             line-height: 1.6;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.05), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(255, 0, 127, 0.05), transparent 25%);
+            position: relative;
         }
 
-        h1, h2, h3, .btn {
+        /* EFECTO GLITCH EN EL FONDO */
+        .glitch-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        /* Líneas de escaneo estilo TV vieja */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Animación de Glitch en el fondo */
+        .glitch-bg::before, .glitch-bg::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(transparent 0%, rgba(0, 240, 255, 0.05) 2%, transparent 3%),
+                linear-gradient(transparent 0%, rgba(255, 0, 127, 0.05) 2%, transparent 3%);
+            background-size: 100% 150px;
+        }
+
+        .glitch-bg::before {
+            animation: bg-glitch-anim 4s infinite linear;
+        }
+
+        .glitch-bg::after {
+            animation: bg-glitch-anim 6s infinite reverse;
+            opacity: 0.7;
+        }
+
+        @keyframes bg-glitch-anim {
+            0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+            10% { transform: translateY(20px) translateX(2px); opacity: 0.8; }
+            20% { transform: translateY(40px) translateX(-2px); }
+            30% { transform: translateY(60px) translateX(0); }
+            40% { transform: translateY(80px) translateX(5px); opacity: 1; }
+            41% { transform: translateY(-20px) translateX(-5px); opacity: 0.2; filter: hue-rotate(90deg); }
+            50% { transform: translateY(100px) translateX(0); opacity: 0.5; }
+            100% { transform: translateY(150px) translateX(0); opacity: 0.5; }
+        }
+
+        h1, h2, h3, h4, .btn {
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
         }
@@ -43,26 +96,35 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 10;
         }
 
-        /* HEADER & HERO */
+        /* HEADER Y LOGO */
         header {
             text-align: center;
-            padding: 4rem 0 2rem;
+            padding: 2rem 0 2rem;
         }
 
-        h1 {
-            font-size: 4rem;
-            color: var(--cyan-neon);
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.5);
-            letter-spacing: 2px;
+        .main-logo {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
             margin-bottom: 2rem;
+            filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5));
+            animation: logo-float 4s ease-in-out infinite;
+        }
+
+        @keyframes logo-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); filter: drop-shadow(0 0 25px rgba(255, 0, 127, 0.6)); }
+            100% { transform: translateY(0px); }
         }
 
         /* VIDEO PLACEHOLDER */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             background-color: #000;
             border: 2px solid var(--cyan-neon);
@@ -91,6 +153,7 @@
             color: var(--cyan-neon);
             opacity: 0.5;
             font-size: 1.2rem;
+            text-align: center;
         }
 
         /* BOTON VOTAR */
@@ -147,10 +210,11 @@
         section {
             background: var(--bg-panel);
             border-left: 4px solid var(--cyan-neon);
-            padding: 2rem;
+            padding: 2.5rem;
             margin-bottom: 3rem;
             border-radius: 0 8px 8px 0;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 5px 5px 25px rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
@@ -159,13 +223,15 @@
             border-left-color: var(--pink-neon);
         }
 
-        h2 {
+        /* Texto Glitch para Títulos */
+        .glitch-title {
             color: var(--pink-neon);
             font-size: 2rem;
             margin-bottom: 1.5rem;
             border-bottom: 1px solid rgba(255, 0, 127, 0.3);
             padding-bottom: 0.5rem;
             display: inline-block;
+            position: relative;
         }
 
         p {
@@ -210,7 +276,7 @@
             background: var(--cyan-neon);
             color: var(--bg-dark);
             border-color: var(--cyan-neon);
-            box-shadow: 0 0 10px var(--cyan-neon);
+            box-shadow: 0 0 15px var(--cyan-neon);
         }
 
         /* TABLA DE REFERENCIAS */
@@ -235,82 +301,138 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* PLACEHOLDERS DE IMAGENES (Pantallas/Personajes) */
-        .media-grid {
+        /* PERSONAJES GRID */
+        .character-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .media-placeholder {
-            background: #1a1130;
-            height: 200px;
-            border: 1px dashed var(--purple-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            border-radius: 4px;
-            transition: all 0.3s;
+        .char-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--purple-light);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .media-placeholder:hover {
+        .char-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .char-card:hover {
             border-color: var(--cyan-neon);
-            border-style: solid;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
-            color: var(--cyan-neon);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .char-card:hover::before {
+            opacity: 1;
+            left: 100%;
+        }
+
+        .char-img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+            transition: filter 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .char-card:hover .char-img {
+            filter: drop-shadow(0 0 10px var(--pink-neon));
+        }
+
+        .char-card h4 {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(94, 70, 156, 0.5);
+            padding-top: 0.5rem;
         }
 
         /* FOOTER / CREADOR */
         footer {
             text-align: center;
-            padding: 3rem;
-            background: #0a0614;
+            padding: 3rem 2rem;
+            background: rgba(10, 6, 20, 0.95);
             border-top: 2px solid var(--pink-neon);
             margin-top: 4rem;
+            position: relative;
+            z-index: 10;
         }
 
         footer h2 {
             color: var(--cyan-neon);
             border: none;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         footer p {
             color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .contact-links a {
             color: var(--pink-neon);
             text-decoration: none;
             font-weight: bold;
-            margin: 0 10px;
-            transition: text-shadow 0.3s;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--pink-neon);
+            border-radius: 4px;
+            transition: all 0.3s;
         }
 
         .contact-links a:hover {
-            text-shadow: 0 0 8px var(--pink-neon);
-            color: #fff;
+            background: var(--pink-neon);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--pink-neon);
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+            .main-logo { max-width: 300px; }
             .btn-votar { font-size: 1.5rem; padding: 1rem 2rem; }
-            section { transform: none !important; margin-left: 10px; margin-right: 10px; }
+            section { transform: none !important; margin-left: 10px; margin-right: 10px; padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="glitch-bg"></div>
+    <div class="scanlines"></div>
+
     <div class="container">
         
         <header>
-            <h1>OUT OF THE BOUNDS</h1>
+            <img src="logofinalcolor.png" alt="Out of the Bounds Logo" class="main-logo">
             
             <div class="video-wrapper">
-                <div class="video-placeholder-text">[ Inserta tu Iframe o Etiqueta de Video Aquí ]</div>
+                <div class="video-placeholder-text">
+                    [ Inserta tu código de YouTube o Vimeo Aquí ]<br>
+                    <small>Reemplaza este texto por el código &lt;iframe&gt;</small>
                 </div>
+            </div>
         </header>
 
         <div class="vote-section">
@@ -318,7 +440,7 @@
         </div>
 
         <section id="concepto">
-            <h2>El Sistema está Roto</h2>
+            <h2 class="glitch-title">El Sistema está Roto</h2>
             <p><strong>Un glitch se adentra en un videojuego olvidado</strong> que continúa funcionando sin jugadores. Su objetivo es romper sus ciclos y desestabilizar el sistema desde adentro.</p>
             <p>A medida que avanza por distintos niveles, el jugador deberá intervenir en su lógica y enfrentar a las entidades del sistema que intentan, desesperadamente, mantener el orden establecido.</p>
             <p style="color: var(--cyan-neon); font-style: italic; margin-top: 1rem;">¿Serás capaz de liberar al mundo de su repetición constante o provocarás su colapso definitivo?</p>
@@ -330,7 +452,7 @@
         </div>
 
         <section id="gameplay">
-            <h2>Mecánicas de Juego</h2>
+            <h2 class="glitch-title">Mecánicas de Juego</h2>
             <p>La supervivencia depende de tu capacidad analítica y tus reflejos. Sumérgete en un gameplay que desafía la lógica:</p>
             <div class="gameplay-tags">
                 <span class="tag">Predicción</span>
@@ -339,15 +461,39 @@
                 <span class="tag">Supervivencia</span>
                 <span class="tag">Observar patrones</span>
                 <span class="tag">Predecir movimientos</span>
-                <span class="tag">Ejecutar acciones con precisión</span>
+                <span class="tag">Ejecutar con precisión</span>
                 <span class="tag">Esquivar obstáculos</span>
                 <span class="tag">Activar elementos</span>
-                <span class="tag">Toma de decisiones rápidas</span>
+                <span class="tag">Toma de decisiones</span>
+            </div>
+        </section>
+
+        <section id="galeria">
+            <h2 class="glitch-title">Entidades del Sistema</h2>
+            <p>Conoce a los elementos corruptos y a los agentes de seguridad que habitan dentro de este entorno olvidado.</p>
+            
+            <div class="character-grid">
+                <div class="char-card">
+                    <img src="glitchversionfinal.jpg" alt="Personaje Glitch" class="char-img">
+                    <h4>Glitch</h4>
+                </div>
+                <div class="char-card">
+                    <img src="luxcolor.png" alt="Personaje Lux" class="char-img">
+                    <h4>Lux</h4>
+                </div>
+                <div class="char-card">
+                    <img src="logcolor.png" alt="Personaje Log" class="char-img">
+                    <h4>Log</h4>
+                </div>
+                <div class="char-card">
+                    <img src="patchcolor.png" alt="Personaje Patch" class="char-img">
+                    <h4>Patch</h4>
+                </div>
             </div>
         </section>
 
         <section id="referencias">
-            <h2>Inspiraciones y Evolución</h2>
+            <h2 class="glitch-title">Inspiraciones y Evolución</h2>
             <div style="overflow-x:auto;">
                 <table class="refs-table">
                     <thead>
@@ -378,26 +524,16 @@
             </div>
         </section>
 
-        <section id="galeria">
-            <h2>Personajes y Entornos</h2>
-            <p>Conoce a LUX y los sistemas que intentarán detenerte.</p>
-            <div class="media-grid">
-                <div class="media-placeholder">Insertar Imagen de LUX</div>
-                <div class="media-placeholder">Insertar Imagen de Entidad</div>
-                <div class="media-placeholder">Insertar Screenshot Nivel 1</div>
-                <div class="media-placeholder">Insertar Screenshot Nivel 2</div>
-            </div>
-        </section>
-
     </div>
 
     <footer id="creador">
         <h2>MEET THE CREATOR</h2>
-        <p>Hola, mi nombre es <strong>Agustina Terrabusi</strong>, estudiante de la Universidad del Salvador.</p>
+        <p>Hola, mi nombre es <strong>Agustina Terrabusi</strong>.</p>
+        <p>Estudiante de la Universidad del Salvador.</p>
         <p>Si te gustó mi proyecto, no dudes en visitar mi portfolio o ponerte en contacto.</p>
-        <div class="contact-links" style="margin-top: 1rem;">
-            <a href="#">Ver Portfolio</a> | 
-            <a href="mailto:agustinaterrabusi15@gmail.com">agustinaterrabusi15@gmail.com</a>
+        <div class="contact-links">
+            <a href="https://terrabusiagustina-bit.github.io/Portfolio/" target="_blank">Ver Portfolio</a>
+            <a href="mailto:agustinaterrabusi15@gmail.com">Enviar Email</a>
         </div>
     </footer>
 
