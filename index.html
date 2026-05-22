@@ -117,22 +117,28 @@
             letter-spacing: 2px;
         }
 
-        /* HERO SECCIÓN (Video y Votar juntos arriba) */
+        /* HERO SECCIÓN MODIFICADA: Video Grande + Botón Abajo */
         .hero-section {
-            display: grid;
-            grid-template-columns: 1.8fr 1fr;
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            gap: 2rem;
             margin-bottom: 4rem;
+            width: 100%;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 900px; /* Video más grande y protagónico */
         }
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; /* Relación 16:9 */
             height: 0;
             background-color: #000;
             border: 2px solid var(--cyan-neon);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -148,34 +154,33 @@
             transform: translate(-50%, -50%);
             color: var(--cyan-neon);
             opacity: 0.6;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             text-align: center;
         }
 
         .action-box {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            width: 100%;
+            max-width: 900px;
             background: rgba(255, 0, 127, 0.05);
             border: 2px dashed var(--pink-neon);
-            padding: 2.5rem 1.5rem;
+            padding: 2rem;
             border-radius: 8px;
             text-align: center;
-            height: 100%;
         }
 
         .action-box p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
             color: var(--text-light);
+            font-weight: bold;
         }
 
         .btn-votar {
             display: inline-block;
             width: 100%;
-            padding: 1.2rem 2rem;
-            font-size: 1.8rem;
+            max-width: 500px; /* Botón grande y centrado debajo */
+            padding: 1.3rem 2.5rem;
+            font-size: 2rem;
             font-weight: 900;
             color: var(--bg-dark);
             background: var(--cyan-neon);
@@ -184,20 +189,20 @@
             text-decoration: none;
             cursor: pointer;
             box-shadow: 0 0 20px var(--cyan-neon);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse 2s infinite;
         }
 
         .btn-votar:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 35px var(--pink-neon);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--pink-neon);
             background: var(--pink-neon);
             color: white;
         }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 15px var(--cyan-neon); }
-            50% { box-shadow: 0 0 30px var(--cyan-neon); }
+            50% { box-shadow: 0 0 35px var(--cyan-neon); }
             100% { box-shadow: 0 0 15px var(--cyan-neon); }
         }
 
@@ -242,7 +247,6 @@
         }
 
         section:hover {
-            transform: translateX(8px);
             border-left-color: var(--pink-neon);
         }
 
@@ -260,7 +264,7 @@
             margin-bottom: 1rem;
         }
 
-        /* NUEVO DISEÑO PASO A PASO PARA LAS MECÁNICAS */
+        /* DISEÑO DE PASOS DE MECÁNICAS (Sin números feos) */
         .mechanics-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -271,30 +275,22 @@
         .step-card {
             background: rgba(18, 12, 36, 0.6);
             border: 1px solid var(--purple-light);
-            padding: 1.5rem;
+            padding: 1.8rem 1.5rem;
             border-radius: 6px;
-            position: relative;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .step-card:hover {
             border-color: var(--cyan-neon);
-        }
-
-        .step-num {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: rgba(0, 240, 255, 0.15);
-            position: absolute;
-            top: 5rem;
-            right: 1rem;
-            line-height: 1;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
         }
 
         .step-card h3 {
             color: var(--cyan-neon);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 0.8rem;
+            border-bottom: 1px dashed rgba(0, 240, 255, 0.2);
+            padding-bottom: 0.4rem;
         }
 
         .step-card p {
@@ -315,44 +311,56 @@
         
         .usp-box h3 { color: var(--cyan-neon); margin-bottom: 0.5rem; }
 
-        /* PERSONAJES GRID */
+        /* PERSONAJES GRID (Efecto Hover de aumento drástico) */
         .character-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
             margin-top: 1.5rem;
+            padding: 1rem 0;
         }
 
         .char-card {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--purple-light);
             border-radius: 8px;
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: center;
-            transition: all 0.3s ease;
+            /* Usamos transiciones suaves y aceleración de hardware para el escalado */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Cuando pasas el mouse por encima, sobresale y se agranda */
         .char-card:hover {
+            transform: scale(1.12); /* Crece notablemente */
             border-color: var(--cyan-neon);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+            z-index: 10; /* Se superpone sobre las demás tarjetas */
         }
 
         .char-img {
             width: 100%;
-            height: 220px;
+            height: 240px;
             object-fit: contain;
             margin-bottom: 1rem;
+            transition: filter 0.3s ease;
+        }
+
+        .char-card:hover .char-img {
+            filter: drop-shadow(0 0 12px var(--cyan-neon));
         }
 
         .char-card h4 {
             color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             border-top: 1px solid rgba(94, 70, 156, 0.4);
-            padding-top: 0.5rem;
+            padding-top: 0.6rem;
+            letter-spacing: 1px;
         }
 
-        /* TABLA DE REFERENCIAS */
+        /* TABLA DE REFERENCIAS CON LUGAR PARA GIFS */
         .refs-table {
             width: 100%;
             border-collapse: collapse;
@@ -360,14 +368,42 @@
         }
 
         .refs-table th, .refs-table td {
-            padding: 1rem;
+            padding: 1.2rem 1rem;
             text-align: left;
             border-bottom: 1px solid var(--purple-light);
             font-size: 1rem;
+            vertical-align: middle;
         }
 
         .refs-table th { color: var(--cyan-neon); font-family: 'Orbitron', sans-serif; }
         .refs-table tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+        /* Contenedor del GIF de referencia dentro de la tabla */
+        .gif-placeholder-box {
+            width: 140px;
+            height: 85px;
+            background: #090514;
+            border: 1px dashed var(--pink-neon);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        .gif-placeholder-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gif-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 0.3rem;
+        }
 
         /* FOOTER */
         footer {
@@ -406,10 +442,10 @@
 
         /* RESPONSIVE */
         @media (max-width: 850px) {
-            .hero-section, .concept-layout { grid-template-columns: 1fr; }
-            .action-box { padding: 1.5rem; }
+            .concept-layout { grid-template-columns: 1fr; }
             .navbar { flex-direction: column; gap: 0.5rem; text-align: center; }
             section { padding: 1.5rem; }
+            .gif-placeholder-box { width: 100px; height: 65px; }
         }
     </style>
 </head>
@@ -427,16 +463,18 @@
         </nav>
 
         <div class="hero-section">
-            <div class="video-wrapper">
-                <div class="video-placeholder-text">
-                    [ Aquí va tu Video Promocional ]<br>
-                    <small>Reemplaza este bloque por tu código iframe de YouTube/Vimeo</small>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <div class="video-placeholder-text">
+                        [ Aquí va tu Video Promocional ]<br>
+                        <small>Reemplaza este bloque por tu código iframe de YouTube/Vimeo</small>
+                    </div>
                 </div>
             </div>
             
             <div class="action-box">
-                <p>¿Te gusta la propuesta de romper el sistema?</p>
-                <a href="#link-de-votacion" class="btn-votar">VOTAR</a>
+                <p>¿Te gusta la propuesta de romper el sistema desde adentro?</p>
+                <a href="#link-de-votacion" class="btn-votar">VOTAR AHORA</a>
             </div>
         </div>
 
@@ -483,23 +521,20 @@
 
         <section id="gameplay">
             <h2 class="glitch-title">¿Cómo se Juega?</h2>
-            <p>Aprender las reglas de <strong>Out of the Bounds</strong> es simple; dominarlas y ganarle al sistema es el verdadero desafío:</p>
+            <p>Aprender las reglas de <strong>Out of the Bounds</strong> es simple; dominarlas y ganarle al software es el verdadero desafío:</p>
             
             <div class="mechanics-steps">
                 <div class="step-card">
-                    <h3>1. Observa y Predice</h3>
+                    <h3>Observa y Predice</h3>
                     <p>Estudia los movimientos de las entidades de seguridad. Cada elemento sigue un patrón lógico estricto que debes calcular antes de actuar.</p>
-                    <div class="step-num">01</div>
                 </div>
                 <div class="step-card">
-                    <h3>2. Modifica el Entorno</h3>
+                    <h3>Modifica el Entorno</h3>
                     <p>No estás atado a las físicas comunes. Hackea las reglas de los niveles cambiando entre los estados del sistema: activar mecanismos o atravesar paredes sólidas.</p>
-                    <div class="step-num">02</div>
                 </div>
                 <div class="step-card">
-                    <h3>3. Evade y Sobrevive</h3>
+                    <h3>Evade y Sobrevive</h3>
                     <p>Escapa de persecuciones dinámicas donde el mapa altera tu visibilidad en tiempo real. Ejecuta movimientos limpios y precisos para no ser borrado.</p>
-                    <div class="step-num">03</div>
                 </div>
             </div>
         </section>
@@ -513,6 +548,7 @@
                             <th>Juegos Base</th>
                             <th>Qué tomamos de ellos</th>
                             <th>Nuestra evolución</th>
+                            <th>Ejemplo de Mecánica</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -520,16 +556,31 @@
                             <td><strong>Portal</strong></td>
                             <td>Resolver retos con una mecánica central.</td>
                             <td>Aquí la lógica cambia constantemente entre esquivar, activar y traspasar código.</td>
+                            <td>
+                                <div class="gif-placeholder-box">
+                                    <img src="portal_ejemplo.gif" alt="Portal Gif" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\"gif-text\">&lt; Sube tu GIF de Portal &gt;</div>'">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>Inside</strong></td>
                             <td>Atmósfera inmersiva y tensión ambiental.</td>
                             <td>Añadimos a LUX cambiando las condiciones de iluminación y gameplay en tiempo real.</td>
+                            <td>
+                                <div class="gif-placeholder-box">
+                                    <img src="inside_ejemplo.gif" alt="Inside Gif" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\"gif-text\">&lt; Sube tu GIF de Inside &gt;</div>'">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>Superliminal</strong></td>
                             <td>Alteración del entorno de juego.</td>
                             <td>No manipulamos la perspectiva óptica, manipulamos los estados del propio motor del juego.</td>
+                            <td>
+                                <div class="gif-placeholder-box">
+                                    <img src="superliminal_ejemplo.gif" alt="Superliminal Gif" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\"gif-text\">&lt; Sube tu GIF de Superliminal &gt;</div>'">
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
