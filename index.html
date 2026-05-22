@@ -1,146 +1,405 @@
-<!-- INFO -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Out of the Bounds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* Paleta de colores basada en tus imágenes */
+        :root {
+            --bg-dark: #120c24; /* Fondo morado muy oscuro */
+            --bg-panel: #221842; /* Fondo de paneles */
+            --cyan-neon: #00f0ff; /* El cian del logo y la cara del personaje */
+            --purple-light: #5e469c; /* Morado de la capa */
+            --pink-neon: #ff007f; /* Detalles magenta/rosa */
+            --text-light: #e0e5ec;
+            --text-muted: #8d85c4;
+        }
 
-<section class="section">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <h2 class="section-title">EL SISTEMA TE ESTÁ OBSERVANDO</h2>
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 0, 127, 0.05), transparent 25%);
+        }
 
-    <div class="info-grid">
+        h1, h2, h3, .btn {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+        }
 
-        <div class="info-card">
-            <h3>Sistema dinámico</h3>
-            <p>
-                El propio sistema funciona como un enemigo inteligente.
-                Modifica caminos, visibilidad y condiciones del nivel en tiempo real
-                para impedir que avances.
-            </p>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* HEADER & HERO */
+        header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: var(--cyan-neon);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        /* VIDEO PLACEHOLDER */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            background-color: #000;
+            border: 2px solid var(--cyan-neon);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--cyan-neon);
+            opacity: 0.5;
+            font-size: 1.2rem;
+        }
+
+        /* BOTON VOTAR */
+        .vote-section {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .btn-votar {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--bg-dark);
+            background: var(--cyan-neon);
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--cyan-neon), inset 0 0 10px rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-votar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .btn-votar:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 0 40px var(--cyan-neon), 0 0 20px var(--pink-neon);
+            background: var(--pink-neon);
+            color: white;
+        }
+
+        .btn-votar:hover::before {
+            left: 100%;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px var(--cyan-neon); }
+            50% { box-shadow: 0 0 35px var(--cyan-neon), 0 0 15px var(--cyan-neon); }
+            100% { box-shadow: 0 0 15px var(--cyan-neon); }
+        }
+
+        /* SECCIONES DE INFO */
+        section {
+            background: var(--bg-panel);
+            border-left: 4px solid var(--cyan-neon);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateX(10px);
+            border-left-color: var(--pink-neon);
+        }
+
+        h2 {
+            color: var(--pink-neon);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 0, 127, 0.3);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* HIGHLIGHTS / USP */
+        .usp-box {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--cyan-neon);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .usp-box h3 {
+            color: var(--cyan-neon);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* GAMEPLAY GRID */
+        .gameplay-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(94, 70, 156, 0.3);
+            border: 1px solid var(--purple-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--cyan-neon);
+            color: var(--bg-dark);
+            border-color: var(--cyan-neon);
+            box-shadow: 0 0 10px var(--cyan-neon);
+        }
+
+        /* TABLA DE REFERENCIAS */
+        .refs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .refs-table th, .refs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--purple-light);
+        }
+
+        .refs-table th {
+            color: var(--cyan-neon);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .refs-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* PLACEHOLDERS DE IMAGENES (Pantallas/Personajes) */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .media-placeholder {
+            background: #1a1130;
+            height: 200px;
+            border: 1px dashed var(--purple-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .media-placeholder:hover {
+            border-color: var(--cyan-neon);
+            border-style: solid;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            color: var(--cyan-neon);
+        }
+
+        /* FOOTER / CREADOR */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: #0a0614;
+            border-top: 2px solid var(--pink-neon);
+            margin-top: 4rem;
+        }
+
+        footer h2 {
+            color: var(--cyan-neon);
+            border: none;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            color: var(--text-muted);
+        }
+
+        .contact-links a {
+            color: var(--pink-neon);
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: text-shadow 0.3s;
+        }
+
+        .contact-links a:hover {
+            text-shadow: 0 0 8px var(--pink-neon);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .btn-votar { font-size: 1.5rem; padding: 1rem 2rem; }
+            section { transform: none !important; margin-left: 10px; margin-right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>OUT OF THE BOUNDS</h1>
+            
+            <div class="video-wrapper">
+                <div class="video-placeholder-text">[ Inserta tu Iframe o Etiqueta de Video Aquí ]</div>
+                </div>
+        </header>
+
+        <div class="vote-section">
+            <a href="#link-de-votacion" class="btn-votar">¡VOTAR AHORA!</a>
         </div>
 
-        <div class="info-card">
-            <h3>Adaptación constante</h3>
-            <p>
-                El jugador cambia constantemente entre mecánicas de supervivencia,
-                evasión, activación y exploración.
-                Ningún desafío se siente igual.
-            </p>
+        <section id="concepto">
+            <h2>El Sistema está Roto</h2>
+            <p><strong>Un glitch se adentra en un videojuego olvidado</strong> que continúa funcionando sin jugadores. Su objetivo es romper sus ciclos y desestabilizar el sistema desde adentro.</p>
+            <p>A medida que avanza por distintos niveles, el jugador deberá intervenir en su lógica y enfrentar a las entidades del sistema que intentan, desesperadamente, mantener el orden establecido.</p>
+            <p style="color: var(--cyan-neon); font-style: italic; margin-top: 1rem;">¿Serás capaz de liberar al mundo de su repetición constante o provocarás su colapso definitivo?</p>
+        </section>
+
+        <div class="usp-box">
+            <h3>NUESTRO SELLO ÚNICO</h3>
+            <p><strong>El sistema actúa como un oponente dinámico.</strong> No es un entorno pasivo: modifica en tiempo real la visibilidad, los caminos y las condiciones del nivel para impedir tu avance.</p>
         </div>
 
-        <div class="info-card">
-            <h3>Atmósfera inmersiva</h3>
-            <p>
-                Explorá espacios digitales abandonados atrapados en bucles infinitos,
-                mientras glitches inestables consumen lentamente la realidad.
-            </p>
-        </div>
+        <section id="gameplay">
+            <h2>Mecánicas de Juego</h2>
+            <p>La supervivencia depende de tu capacidad analítica y tus reflejos. Sumérgete en un gameplay que desafía la lógica:</p>
+            <div class="gameplay-tags">
+                <span class="tag">Predicción</span>
+                <span class="tag">Razonamiento espacial</span>
+                <span class="tag">Persecución y evasión</span>
+                <span class="tag">Supervivencia</span>
+                <span class="tag">Observar patrones</span>
+                <span class="tag">Predecir movimientos</span>
+                <span class="tag">Ejecutar acciones con precisión</span>
+                <span class="tag">Esquivar obstáculos</span>
+                <span class="tag">Activar elementos</span>
+                <span class="tag">Toma de decisiones rápidas</span>
+            </div>
+        </section>
+
+        <section id="referencias">
+            <h2>Inspiraciones y Evolución</h2>
+            <div style="overflow-x:auto;">
+                <table class="refs-table">
+                    <thead>
+                        <tr>
+                            <th>Juego de Ref.</th>
+                            <th>Nuestra Similitud</th>
+                            <th>La Diferencia OUT OF THE BOUNDS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Portal</strong></td>
+                            <td>Uso de una mecánica central para resolver situaciones.</td>
+                            <td>El jugador no mantiene una sola lógica: debe cambiar constantemente entre esquivar, activar y atravesar.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inside</strong></td>
+                            <td>Uso del entorno y la atmósfera para generar tensión.</td>
+                            <td>Nuestro personaje, LUX, puede cambiar la visibilidad en tiempo real, afectando directamente el gameplay.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Superliminal</strong></td>
+                            <td>Interacción con reglas del entorno para avanzar.</td>
+                            <td>No se altera la perspectiva visual, sino que se alteran los estados internos del sistema (activar, desactivar, atravesar código).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="galeria">
+            <h2>Personajes y Entornos</h2>
+            <p>Conoce a LUX y los sistemas que intentarán detenerte.</p>
+            <div class="media-grid">
+                <div class="media-placeholder">Insertar Imagen de LUX</div>
+                <div class="media-placeholder">Insertar Imagen de Entidad</div>
+                <div class="media-placeholder">Insertar Screenshot Nivel 1</div>
+                <div class="media-placeholder">Insertar Screenshot Nivel 2</div>
+            </div>
+        </section>
 
     </div>
 
-</section>
-
-<!-- GAMEPLAY -->
-
-<section class="section">
-
-    <h2 class="section-title">GAMEPLAY</h2>
-
-    <div class="gameplay-list">
-
-        <div class="gameplay-item">
-            <span>Predicción</span>
+    <footer id="creador">
+        <h2>MEET THE CREATOR</h2>
+        <p>Hola, mi nombre es <strong>Agustina Terrabusi</strong>, estudiante de la Universidad del Salvador.</p>
+        <p>Si te gustó mi proyecto, no dudes en visitar mi portfolio o ponerte en contacto.</p>
+        <div class="contact-links" style="margin-top: 1rem;">
+            <a href="#">Ver Portfolio</a> | 
+            <a href="mailto:agustinaterrabusi15@gmail.com">agustinaterrabusi15@gmail.com</a>
         </div>
+    </footer>
 
-        <div class="gameplay-item">
-            <span>Razonamiento espacial</span>
-        </div>
-
-        <div class="gameplay-item">
-            <span>Supervivencia</span>
-        </div>
-
-        <div class="gameplay-item">
-            <span>Observación de patrones</span>
-        </div>
-
-        <div class="gameplay-item">
-            <span>Predicción de movimientos</span>
-        </div>
-
-        <div class="gameplay-item">
-            <span>Acciones de precisión</span>
-        </div>
-
-        <div class="gameplay-item">
-            <span>Esquivar obstáculos</span>
-        </div>
-
-        <div class="gameplay-item">
-            <span>Activar elementos</span>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- REFERENCIAS -->
-
-<section class="section">
-
-    <h2 class="section-title">REFERENCIAS</h2>
-
-    <div class="info-grid">
-
-        <div class="info-card">
-            <h3>Portal</h3>
-            <p>
-                Comparte el uso de una mecánica central para resolver situaciones.
-                Pero acá el gameplay cambia constantemente entre distintas lógicas y desafíos.
-            </p>
-        </div>
-
-        <div class="info-card">
-            <h3>Inside</h3>
-            <p>
-                Utiliza la atmósfera y el entorno para generar tensión.
-                Lux puede alterar la visibilidad en tiempo real,
-                afectando directamente la experiencia de juego.
-            </p>
-        </div>
-
-        <div class="info-card">
-            <h3>Superliminal</h3>
-            <p>
-                Interacción con las reglas del entorno para avanzar.
-                En Out Of The Bounds no cambia la perspectiva:
-                cambian los estados del sistema.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- CREATOR -->
-
-<section class="section">
-
-    <h2 class="section-title">MEET THE CREATOR</h2>
-
-    <div class="creator">
-
-        <p>
-            Hola! Mi nombre es Agustina Terrabusi y soy estudiante de la Universidad del Salvador.
-            Out Of The Bounds nace como una experiencia experimental enfocada en la tensión,
-            los glitches y los sistemas dinámicos.
-        </p>
-
-        <p>
-            Si te gustó el proyecto no dudes en visitar mi portfolio
-            o contactarme por mail:
-        </p>
-
-        <p style="color:#9ef7ff;">
-            agustinaterrabusi15@gmail.com
-        </p>
-
-    </div>
-
-</section>
+</body>
+</html>
