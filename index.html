@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <!-- Meta Pixel Code -->
-<script>
+ <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -17,8 +16,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Out of the Bounds - Presentación</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -289,13 +287,14 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
         
         .usp-box h3 { color: var(--cyan-neon); margin-bottom: 0.5rem; }
 
-        /* PERSONAJES GRID */
+        /* PERSONAJES GRID - MODIFICADO A UNA FILA ESTRICTA */
         .character-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr); /* 4 Columnas fijas obligatorias */
+            gap: 1.5rem;
             margin-top: 1.5rem;
             padding: 1rem 0;
+            overflow-x: auto; /* Scroll por si la pantalla es muy chica */
         }
 
         .char-card {
@@ -307,10 +306,11 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             z-index: 1;
+            min-width: 180px; /* Previene que se aplasten en pantallas chicas */
         }
 
         .char-card:hover {
-            transform: scale(1.12);
+            transform: scale(1.08);
             border-color: var(--cyan-neon);
             box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
             z-index: 10;
@@ -318,7 +318,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
 
         .char-img {
             width: 100%;
-            height: 240px;
+            height: 200px;
             object-fit: contain;
             margin-bottom: 1rem;
             transition: filter 0.3s ease;
@@ -330,10 +330,103 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
 
         .char-card h4 {
             color: var(--text-light);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border-top: 1px solid rgba(94, 70, 156, 0.4);
             padding-top: 0.6rem;
             letter-spacing: 1px;
+        }
+
+        /* RE-DISEÑO COMPLETO DEL FOOTER (PORTFOLIO Y CONTACTO) */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(10, 6, 25, 0.95);
+            border: 2px solid var(--pink-neon);
+            border-radius: 12px;
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.2);
+            animation: footer-glow 4s infinite alternate;
+        }
+
+        @keyframes footer-glow {
+            0% { box-shadow: 0 0 20px rgba(255, 0, 127, 0.15); border-color: #d10066; }
+            100% { box-shadow: 0 0 40px rgba(255, 0, 127, 0.4); border-color: var(--pink-neon); }
+        }
+
+        footer h2 { 
+            color: var(--cyan-neon); 
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem; 
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+        }
+
+        footer p { 
+            color: var(--text-light); 
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        footer p strong {
+            color: var(--cyan-neon);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 900;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.1), rgba(94, 70, 156, 0.3));
+            border: 2px solid var(--pink-neon);
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .contact-links a::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.4s ease;
+        }
+
+        .contact-links a:hover::before {
+            left: 100%;
+        }
+
+        .contact-links a:hover {
+            background: var(--pink-neon);
+            color: #000000;
+            box-shadow: 0 0 35px var(--pink-neon);
+            transform: translateY(-4px);
+        }
+
+        /* Ajuste específico para el botón secundario */
+        .contact-links a.btn-alt {
+            border-color: var(--cyan-neon);
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(94, 70, 156, 0.3));
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        .contact-links a.btn-alt:hover {
+            background: var(--cyan-neon);
+            color: #000000;
+            box-shadow: 0 0 35px var(--cyan-neon);
         }
 
         /* RESPONSIVE */
@@ -342,6 +435,8 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             .navbar { flex-direction: column; gap: 0.5rem; text-align: center; }
             section { padding: 1.5rem; }
             .btn-votar { font-size: 1.8rem; padding: 1.2rem 2rem; }
+            .contact-links { flex-direction: column; gap: 15px; align-items: center; }
+            .contact-links a { width: 100%; max-width: 300px; }
         }
     </style>
 </head>
@@ -357,7 +452,6 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             <div class="nav-title">GAME PITCH PRESSED</div>
         </nav>
 
-        <!-- SECCIÓN PRINCIPAL: ÚNICAMENTE VIDEO Y BOTÓN DE VOTAR -->
         <div class="hero-section">
             <div class="video-container">
                 <div class="video-wrapper">
@@ -442,7 +536,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
         <p>Desarrollado por <strong>Agustina Terrabusi</strong> — Estudiante de la Universidad del Salvador.</p>
         <div class="contact-links">
             <a href="https://terrabusiagustina-bit.github.io/Portfolio/" target="_blank">Mi Portfolio</a>
-            <a href="mailto:agustinaterrabusi15@gmail.com">Contacto</a>
+            <a href="mailto:agustinaterrabusi15@gmail.com" class="btn-alt">Contacto</a>
         </div>
     </footer>
 
