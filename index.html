@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <!-- Meta Pixel Code -->
-<script>
+ <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -17,8 +16,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Out of the Bounds - Presentación</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -163,16 +161,6 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
         .video-wrapper iframe {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-        }
-
-        .video-placeholder-text {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--cyan-neon);
-            opacity: 0.6;
-            font-size: 1.2rem;
-            text-align: center;
         }
 
         .action-box {
@@ -482,10 +470,13 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
         <div class="hero-section">
             <div class="video-container">
                 <div class="video-wrapper">
-                    <div class="video-placeholder-text">
-                        [ Aquí va tu Video Promocional ]<br>
-                        <small>Reemplaza este bloque por tu código iframe de YouTube/Vimeo</small>
-                    </div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/ycF2gRWJnng?autoplay=1&mute=1&rel=0" 
+                        title="Out of the Bounds - Video Promocional" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
             </div>
             
