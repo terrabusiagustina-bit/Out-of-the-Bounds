@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <script>
+ <!-- Meta Pixel Code -->
+<script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -16,7 +17,8 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
 /></noscript>
-<meta charset="UTF-8">
+<!-- End Meta Pixel Code -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Out of the Bounds - Presentación</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -62,20 +64,6 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
-        }
-
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 999;
         }
 
         .glitch-bg::before, .glitch-bg::after {
@@ -132,19 +120,19 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             letter-spacing: 2px;
         }
 
-        /* HERO SECCIÓN MODIFICADA: Video Grande + Botón Abajo */
+        /* HERO SECCIÓN: Video Grande + Botón Gigante Directo Abajo */
         .hero-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
             margin-bottom: 4rem;
             width: 100%;
         }
 
         .video-container {
             width: 100%;
-            max-width: 900px; /* Video más grande y protagónico */
+            max-width: 900px;
         }
 
         .video-wrapper {
@@ -163,44 +151,28 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        .action-box {
-            width: 100%;
-            max-width: 900px;
-            background: rgba(255, 0, 127, 0.05);
-            border: 2px dashed var(--pink-neon);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .action-box p {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-            font-weight: bold;
-        }
-
         .btn-votar {
             display: inline-block;
             width: 100%;
-            max-width: 500px; /* Botón grande y centrado debajo */
-            padding: 1.3rem 2.5rem;
-            font-size: 2rem;
+            max-width: 600px; /* Botón aún más grande e importante */
+            padding: 1.5rem 3rem;
+            font-size: 2.3rem;
             font-weight: 900;
+            text-align: center;
             color: var(--bg-dark);
             background: var(--cyan-neon);
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 0 20px var(--cyan-neon);
+            box-shadow: 0 0 25px var(--cyan-neon);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse 2s infinite;
         }
 
         .btn-votar:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 40px var(--pink-neon);
+            box-shadow: 0 0 45px var(--pink-neon);
             background: var(--pink-neon);
             color: white;
         }
@@ -269,7 +241,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             margin-bottom: 1rem;
         }
 
-        /* DISEÑO DE PASOS DE MECÁNICAS (Sin números feos) */
+        /* DISEÑO DE PASOS DE MECÁNICAS */
         .mechanics-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -316,7 +288,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
         
         .usp-box h3 { color: var(--cyan-neon); margin-bottom: 0.5rem; }
 
-        /* PERSONAJES GRID (Efecto Hover de aumento drástico) */
+        /* PERSONAJES GRID */
         .character-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -331,18 +303,16 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             border-radius: 8px;
             padding: 1.2rem;
             text-align: center;
-            /* Usamos transiciones suaves y aceleración de hardware para el escalado */
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             z-index: 1;
         }
 
-        /* Cuando pasas el mouse por encima, sobresale y se agranda */
         .char-card:hover {
-            transform: scale(1.12); /* Crece notablemente */
+            transform: scale(1.12);
             border-color: var(--cyan-neon);
             box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
-            z-index: 10; /* Se superpone sobre las demás tarjetas */
+            z-index: 10;
         }
 
         .char-img {
@@ -365,7 +335,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             letter-spacing: 1px;
         }
 
-        /* TABLA DE REFERENCIAS CON LUGAR PARA GIFS */
+        /* TABLA DE REFERENCIAS */
         .refs-table {
             width: 100%;
             border-collapse: collapse;
@@ -383,7 +353,6 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
         .refs-table th { color: var(--cyan-neon); font-family: 'Orbitron', sans-serif; }
         .refs-table tr:hover { background: rgba(255, 255, 255, 0.03); }
 
-        /* Contenedor del GIF de referencia dentro de la tabla */
         .gif-placeholder-box {
             width: 140px;
             height: 85px;
@@ -451,6 +420,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             .navbar { flex-direction: column; gap: 0.5rem; text-align: center; }
             section { padding: 1.5rem; }
             .gif-placeholder-box { width: 100px; height: 65px; }
+            .btn-votar { font-size: 1.8rem; padding: 1.2rem 2rem; }
         }
     </style>
 </head>
@@ -458,7 +428,6 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
 
     <canvas id="code-matrix"></canvas>
     <div class="glitch-bg"></div>
-    <div class="scanlines"></div>
 
     <div class="container">
         
@@ -467,6 +436,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             <div class="nav-title">GAME PITCH PRESSED</div>
         </nav>
 
+        <!-- SECCIÓN PRINCIPAL: ÚNICAMENTE VIDEO Y BOTÓN DE VOTAR -->
         <div class="hero-section">
             <div class="video-container">
                 <div class="video-wrapper">
@@ -480,10 +450,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
                 </div>
             </div>
             
-            <div class="action-box">
-                <p>¿Te gusta la propuesta de romper el sistema desde adentro?</p>
-                <a href="https://terrabusiagustina-bit.github.io/agradecimiento/" class="btn-votar">VOTAR AHORA</a>
-            </div>
+            <a href="https://terrabusiagustina-bit.github.io/agradecimiento/" class="btn-votar">VOTAR AHORA</a>
         </div>
 
         <div class="concept-layout">
