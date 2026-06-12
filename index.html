@@ -429,6 +429,37 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             box-shadow: 0 0 35px var(--cyan-neon);
         }
 
+        /* NUEVO BOTÓN DE JUGAR (Abajo de todo) */
+        .btn-jugar {
+            display: inline-block;
+            width: 100%;
+            max-width: 450px;
+            padding: 1.3rem 2.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--pink-neon), #3a1c5c);
+            border: 3px solid var(--cyan-neon);
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), inset 0 0 10px rgba(255, 0, 127, 0.3);
+            letter-spacing: 5px;
+            transition: all 0.3s ease;
+            margin-top: 3.5rem;
+        }
+
+        .btn-jugar:hover {
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: 0 0 40px var(--cyan-neon), inset 0 0 15px var(--pink-neon);
+            background: var(--cyan-neon);
+            color: var(--bg-dark);
+            border-color: var(--pink-neon);
+        }
+
         /* RESPONSIVE */
         @media (max-width: 850px) {
             .concept-layout { grid-template-columns: 1fr; }
@@ -437,6 +468,7 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
             .btn-votar { font-size: 1.8rem; padding: 1.2rem 2rem; }
             .contact-links { flex-direction: column; gap: 15px; align-items: center; }
             .contact-links a { width: 100%; max-width: 300px; }
+            .btn-jugar { font-size: 1.8rem; padding: 1rem 2rem; max-width: 300px; }
         }
     </style>
 </head>
@@ -537,6 +569,10 @@ src="https://www.facebook.com/tr?id=971557049194993&ev=PageView&noscript=1"
         <div class="contact-links">
             <a href="https://terrabusiagustina-bit.github.io/Portfolio/" target="_blank">Mi Portfolio</a>
             <a href="mailto:agustinaterrabusi15@gmail.com" class="btn-alt">Contacto</a>
+        </div>
+
+        <div>
+            <a href="https://terrabusiagustina-bit.github.io/agradecimiento/" class="btn-jugar">JUGAR</a>
         </div>
     </footer>
 
